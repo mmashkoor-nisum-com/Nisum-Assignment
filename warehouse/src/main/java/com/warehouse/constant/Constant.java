@@ -10,5 +10,6 @@ public class Constant {
 	public static final String WAREHOUSE_DELETED = "Warehouse Successfully Deleted";
 	public static final String PRODUCT_DELETED = "Warehouse Successfully Deleted";
 	public static final String PRODUCT_ADDED = "New Product Successfully Added";
+	public static final String PRODUCT_UPDATED = "Product Successfully Updated";
 	public static final String ADD_ITEM_QUANTITY = "Item Quantity Successfully Added";
 }

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.warehouse.constant.Constant;
 import com.warehouse.models.Product;
+import com.warehouse.models.ProductAttribute;
+import com.warehouse.repository.ProductAttributesRepository;
 import com.warehouse.repository.ProductRepository;
 import com.warehouse.services.ProductService;
 
@@ -14,6 +16,9 @@ public class ProductServiceImpl implements ProductService{
 
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	private ProductAttributesRepository productAttributesRepository;
 
 	public List<Product> getProducts() {
 		return productRepository.findByIsDeleted(Constant.IS_ACTIVE);
@@ -24,12 +29,27 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	public String addProduct(Product product) {
-		productRepository.save(product);
+		product = productRepository.save(product);
+		ProductAttribute productAttribute = new ProductAttribute();
+		productAttribute.setProduct(product);
+		productAttribute.setAttributesDetail(product.getProductAttributes().get(0).getAttributesDetail());
+		productAttributesRepository.save(productAttribute);
 		return Constant.PRODUCT_ADDED;
 	}
 
 	public String updateProduct(Product product, long id) {
-		return null;
+		Product productRecord = productRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE);
+		if (productRecord != null) {
+			product.setId(id);
+			productRepository.save(product);
+			ProductAttribute productAttribute = new ProductAttribute();
+			productAttribute.setId(productRecord.getProductAttributes().get(0).getId());
+			productAttribute.setProduct(product);
+			productAttribute.setAttributesDetail(product.getProductAttributes().get(0).getAttributesDetail());
+			productAttributesRepository.save(productAttribute);
+			return Constant.PRODUCT_UPDATED;
+		}
+		return Constant.NO_RECORD;
 	}
 
 	public String deleteProduct(long id) {

@@ -64,9 +64,9 @@ public class ProductController {
 	 * @param product id
 	 * @return message
 	 */
-	@PutMapping("/{id}")
-	public String updateProduct(@RequestBody Product product , @PathVariable long id) {
-		return productService.updateProduct(product, id);
+	@PutMapping("/{productId}")
+	public String updateProduct(@RequestBody Product product , @PathVariable long productId) {
+		return productService.updateProduct(product, productId);
 	}
 
 	/**
