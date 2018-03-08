@@ -17,7 +17,7 @@ public class WarehouseServiceImpl implements WarehouseService {
 	private WarehouseRepository warehouseRepository;
 
 	public List<Warehouse> getWarehouses(){
-		return this.warehouseRepository.findByIsDeleted(Constant.IS_ACTIVE);
+		return warehouseRepository.findByIsDeleted(Constant.IS_ACTIVE);
 	}
 
 	public Warehouse getWarehouseById(int id) {
@@ -30,7 +30,7 @@ public class WarehouseServiceImpl implements WarehouseService {
 	}
 
 	public String updateWarehouse(Warehouse warehouse, int id) {
-		Warehouse warehouseRecord = warehouseRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE);;
+		Warehouse warehouseRecord = warehouseRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE);
 		if(warehouseRecord != null) {
 			warehouse.setId(id);
 			warehouseRepository.save(warehouse);
@@ -40,7 +40,7 @@ public class WarehouseServiceImpl implements WarehouseService {
 	}
 
 	public String deleteWarehouse(int id) {
-		Warehouse warehouse = warehouseRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE);;
+		Warehouse warehouse = warehouseRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE);
 		if(warehouse != null) {
 			warehouse.setIsDeleted(Constant.IS_DELETE);
 			warehouseRepository.save(warehouse);
