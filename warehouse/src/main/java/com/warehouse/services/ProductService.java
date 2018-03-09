@@ -43,5 +43,13 @@ public interface ProductService {
 	 * @return message
 	 */
 	public String deleteProduct(long id);
+	
+	/**
+	 * The method return the all the sizes of particular product present in any warehouse.
+	 * 
+	 * @param product id
+	 * @return list of Product
+	 */
+	public List<Product> getAllProductSizeByProductId(long id);
 
 }

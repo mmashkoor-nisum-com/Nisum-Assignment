@@ -93,5 +93,15 @@ public class ProductServiceTest {
 		String result = productServiceImpl.deleteProduct(productId);
 		assertEquals(Constant.PRODUCT_DELETED,result);
 	}
+	
+	@Test
+	public void testGetAllProductSizeByProductId() {
+		int expected = 2;
+		List<Product> mockProductList = MockFactory.getMockProductList();
+		
+		when(productRepository.findByIsDeletedAndProductAttributes_Product_Id(Constant.IS_ACTIVE, productId)).thenReturn(mockProductList);
+		mockProductList =productServiceImpl.getAllProductSizeByProductId(productId);
+		assertEquals(expected, mockProductList.size());
+	}
 
 }

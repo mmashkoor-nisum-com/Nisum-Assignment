@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.warehouse.dto.ProductSizeDTO;
 import com.warehouse.dto.ProductDTO;
 import com.warehouse.models.Product;
 import com.warehouse.services.ProductService;
+import com.warehouse.utils.ProductSizeUtils;
 import com.warehouse.utils.ProductUtils;
 
 @RestController
@@ -24,7 +26,7 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	/**
 	 * The method is used to fetch all the products.
 	 * 
@@ -35,7 +37,7 @@ public class ProductController {
 		List<Product> productList = productService.getProducts();
 		return ProductUtils.convertProductListToProductListDTOs(productList);
 	}
-	
+
 	/**
 	 * This method is used to return the particular product.
 	 *  
@@ -47,7 +49,7 @@ public class ProductController {
 		Product product = productService.getProductById(productId);
 		return ProductUtils.convertProductToProductDTO(product);
 	}
-	
+
 	/**
 	 * This method is used to add the product.
 	 *  
@@ -78,5 +80,17 @@ public class ProductController {
 	@DeleteMapping("/{productId}")
 	public String deleteWarehouse(@PathVariable long productId) {
 		return productService.deleteProduct(productId);
+	}
+
+	/**
+	 * The method return the all the sizes of particular product present in any warehouse.
+	 * 
+	 * @param product id
+	 * @return list of Product
+	 */
+	@GetMapping("/size/{productId}")
+	public List<ProductSizeDTO> getAllProductSizeByProductId(@PathVariable long productId){
+		List<Product> productList =  productService.getAllProductSizeByProductId(productId);
+		return ProductSizeUtils.convertProductToProductSizeDTO(productList);
 	}
 }

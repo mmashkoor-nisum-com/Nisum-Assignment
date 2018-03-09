@@ -61,4 +61,9 @@ public class ProductServiceImpl implements ProductService{
 		}
 		return Constant.NO_RECORD;
 	}
+
+	public List<Product> getAllProductSizeByProductId(long id) {
+		return productRepository.findByIsDeletedAndProductAttributes_Product_Id(Constant.IS_ACTIVE, id);
+	}
+
 }

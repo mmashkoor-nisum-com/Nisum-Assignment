@@ -1,11 +1,11 @@
 package com.warehouse.dto;
 
-public class ProductAttributesDTO {
+public class ProductSizeDTO {
 	
 	private String productName;
 	private String productSize;
 	
-	public ProductAttributesDTO() {
+	public ProductSizeDTO() {
 	}
 
 	public String getProductName() {

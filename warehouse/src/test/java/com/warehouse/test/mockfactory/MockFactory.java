@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.warehouse.dto.InventoryDTO;
-import com.warehouse.dto.ProductAttributesDTO;
-import com.warehouse.dto.ProductDTO;
-import com.warehouse.dto.WarehouseDTO;
 import com.warehouse.models.AttributesDetail;
 import com.warehouse.models.Inventory;
 import com.warehouse.models.Product;
@@ -20,10 +16,6 @@ public class MockFactory {
 	static Product mockProduct;
 	static Inventory mockInventory;
 	static ProductAttribute mockProductAttribute;
-	static WarehouseDTO mockWarehouseDTO;
-	static ProductDTO mockProductDTO;
-	static ProductAttributesDTO mockProductAttributeDTO;
-	static InventoryDTO mockInventoryDTO;
 	static AttributesDetail mockAttributeDetail;
 
 	public static Warehouse getMockWarehouse(int id) {
