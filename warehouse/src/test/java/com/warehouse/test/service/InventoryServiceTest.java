@@ -20,12 +20,11 @@ import com.warehouse.test.mockfactory.MockFactory;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class InventoryServiceTest {
 
-	static int warehouseId = 1;
-	static long inventoryId = 1;
-	static long productId = 1;
-	static int productAttributeId = 1;
-	static int expectedValue = 2;
-	static int quantity = 10;
+	private int warehouseId = 1;
+	private long productId = 1;
+	private int productAttributeId = 1;
+	private int expectedValue = 2;
+	private int quantity = 10;
 	
 	@Mock
 	private InventoryRepository inventoryRepository;

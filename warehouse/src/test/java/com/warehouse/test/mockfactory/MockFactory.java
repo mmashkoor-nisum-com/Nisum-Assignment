@@ -1,6 +1,7 @@
 package com.warehouse.test.mockfactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.warehouse.dto.InventoryDTO;
@@ -44,7 +45,11 @@ public class MockFactory {
 		mockProduct.setProductName("Nike");
 		mockProduct.setIsDeleted(0);
 		mockProduct.setProductType(null);
-		mockProduct.setProductAttributes(null);
+		mockProductAttribute = new ProductAttribute();
+		mockProductAttribute.setId(1);
+		mockProductAttribute.setProduct(null);
+		mockProductAttribute.setAttributesDetail(getAttributeDetail());
+		mockProduct.setProductAttributes(Arrays.asList(mockProductAttribute));
 		mockProduct.setBrand(null);
 
 		return mockProduct;

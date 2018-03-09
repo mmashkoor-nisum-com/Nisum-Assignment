@@ -21,8 +21,8 @@ import com.warehouse.test.mockfactory.MockFactory;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ProductAttributeServiceTest {
 
-	static long productId = 1;
-	static int expectedValue = 2;
+	private long productId = 1;
+	private int expectedValue = 2;
 	
 	@Mock
 	private ProductAttributesRepository productAttributesRepository;

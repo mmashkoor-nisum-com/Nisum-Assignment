@@ -22,7 +22,7 @@ import com.warehouse.test.mockfactory.MockFactory;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class WarehouseServiceTest {
 	
-	static int id = 1;
+	private int id = 1;
 
 	@Mock
 	private WarehouseRepository warehouseRepository;
