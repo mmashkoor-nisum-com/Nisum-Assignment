@@ -96,8 +96,8 @@ public class MockFactory {
 	public static List<Warehouse> getMockWarehouseList(){
 
 		List<Warehouse> mockWarehouseList = new ArrayList<Warehouse>(0);
-		mockWarehouseList.add(MockFactory.getMockWarehouse(1));
-		mockWarehouseList.add(MockFactory.getMockWarehouse(2));
+		mockWarehouseList.add(getMockWarehouse(1));
+		mockWarehouseList.add(getMockWarehouse(2));
 
 		return mockWarehouseList;
 
@@ -106,8 +106,8 @@ public class MockFactory {
 	public static List<Product> getMockProductList(){
 
 		List<Product> mockProductList = new ArrayList<Product>(0);
-		mockProductList.add(MockFactory.getMockProduct(1L));
-		mockProductList.add(MockFactory.getMockProduct(2L));
+		mockProductList.add(getMockProduct(1L));
+		mockProductList.add(getMockProduct(2L));
 
 		return mockProductList;
 
@@ -116,8 +116,8 @@ public class MockFactory {
 	public static List<ProductAttribute> getMockProductAttributeList(){
 
 		List<ProductAttribute> mockProductAttributeList = new ArrayList<ProductAttribute>(0);
-		mockProductAttributeList.add(MockFactory.getMockProductAttribute(2));
-		mockProductAttributeList.add(MockFactory.getMockProductAttribute(3));
+		mockProductAttributeList.add(getMockProductAttribute(2));
+		mockProductAttributeList.add(getMockProductAttribute(3));
 
 		return mockProductAttributeList;
 
