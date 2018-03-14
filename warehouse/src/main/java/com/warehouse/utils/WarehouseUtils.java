@@ -6,9 +6,12 @@ import com.warehouse.dto.WarehouseDTO;
 import com.warehouse.models.Warehouse;
 
 public class WarehouseUtils {
+	
+	private WarehouseUtils() {
+	}
 
 	public static List<WarehouseDTO> convertWarehouseToWarehouseDTOs(List<Warehouse> warehouses) {
-		List<WarehouseDTO> warehouseListDTOs = new ArrayList<WarehouseDTO>(0);
+		List<WarehouseDTO> warehouseListDTOs = new ArrayList<>(0);
 		for (Warehouse warehouse : warehouses) {
 			WarehouseDTO warehouseDTO = new WarehouseDTO();
 			warehouseDTO.setId(warehouse.getId());

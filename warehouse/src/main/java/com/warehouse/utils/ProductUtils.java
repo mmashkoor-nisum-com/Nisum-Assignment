@@ -6,9 +6,12 @@ import com.warehouse.dto.ProductDTO;
 import com.warehouse.models.Product;
 
 public class ProductUtils {
+	
+	private ProductUtils() {
+	}
 
 	public static List<ProductDTO> convertProductListToProductListDTOs(List<Product> products) {
-		List<ProductDTO> productListDTOs = new ArrayList<ProductDTO>(0);
+		List<ProductDTO> productListDTOs = new ArrayList<>(0);
 		for(Product product : products) {
 			ProductDTO productDTO = new ProductDTO();
 			productDTO.setId(product.getId());

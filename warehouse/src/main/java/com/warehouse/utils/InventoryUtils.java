@@ -8,8 +8,11 @@ import com.warehouse.models.Inventory;
 
 public class InventoryUtils {
 	
+	private InventoryUtils() {
+	}
+	
 	public static List<InventoryDTO> convertInventoryListToInventoryListDTOs(List<Inventory> inventories){
-		List<InventoryDTO> inventoryDTOs = new ArrayList<InventoryDTO>(0);
+		List<InventoryDTO> inventoryDTOs = new ArrayList<>(0);
 		for(Inventory inventory : inventories) {
 			InventoryDTO inventoryDTO = new InventoryDTO();
 			inventoryDTO.setWarehouseName(inventory.getWarehouse().getWarehouseName());
@@ -27,7 +30,7 @@ public class InventoryUtils {
 	}
 	
 	public static List<Inventory> setQuantityItem (List<Inventory> inventories , int quantity){
-		 List<Inventory> inventoryList = new ArrayList<Inventory>(0);
+		 List<Inventory> inventoryList = new ArrayList<>(0);
 		    for (Inventory inventory : inventories) {
 		    	int itemQuantity = inventory.getAvaliableQuantity();
 		    	itemQuantity = itemQuantity + quantity;
