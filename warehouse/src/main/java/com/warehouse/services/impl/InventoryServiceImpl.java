@@ -33,12 +33,12 @@ public class InventoryServiceImpl implements InventoryService{
 
 	public String setItemQuantityByProductAttributeId(int id , int quantity){
 		List<Inventory> inventories = inventoryRepository.findByProductAttribute_IdAndProductAttribute_Product_IsDeleted(id,Constant.IS_ACTIVE);
-		if (inventories != null) {
+		if (!inventories.isEmpty()) {
 			inventories = InventoryUtils.setQuantityItem(inventories, quantity);
 			inventoryRepository.save(inventories);
 			return Constant.ADD_ITEM_QUANTITY;
 		}
-		return Constant.NO_RECORD;
+		return null;
 	}
 
 	public String setItemQuantityByWarehouseIdAndProductAttributeId(int id , int pid, int quantity){
@@ -48,27 +48,27 @@ public class InventoryServiceImpl implements InventoryService{
 			inventoryRepository.save(inventory);
 			return Constant.ADD_ITEM_QUANTITY;
 		}
-		return Constant.NO_RECORD;
+		return null;
 	}
 
 	public String setItemQuantityByWarehouseId(int warehouseId, int quantity) {
 		List<Inventory> inventories = inventoryRepository.findByWarehouse_IdAndWarehouse_IsDeleted(warehouseId , Constant.IS_ACTIVE);
-		if (inventories != null) {
+		if (!inventories.isEmpty()) {
 			inventories = InventoryUtils.setQuantityItem(inventories, quantity);
 			inventoryRepository.save(inventories);
 			return Constant.ADD_ITEM_QUANTITY;
 		}
-		return Constant.NO_RECORD;
+		return null;
 	}
 
 	public String setItemQuantityToAllProducts(int quantity) {
 		List<Inventory> inventories = inventoryRepository.findByWarehouse_isDeletedAndProductAttribute_Product_isDeleted( Constant.IS_ACTIVE, Constant.IS_ACTIVE);
-		if (inventories != null) {
+		if (!inventories.isEmpty()) {
 			inventories = InventoryUtils.setQuantityItem(inventories, quantity);
 			inventoryRepository.save(inventories);
 			return Constant.ADD_ITEM_QUANTITY;
 		}
-		return Constant.NO_RECORD;
+		return null;
 	}
 
 }

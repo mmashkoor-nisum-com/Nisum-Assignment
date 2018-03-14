@@ -3,15 +3,19 @@ package com.warehouse.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.warehouse.constant.Constant;
 import com.warehouse.dto.InventoryDTO;
 import com.warehouse.models.Inventory;
 import com.warehouse.services.InventoryService;
+import com.warehouse.utils.CustomMessage;
 import com.warehouse.utils.InventoryUtils;
 
 @RestController
@@ -27,9 +31,13 @@ public class InventoryController {
 	 * @return list of InventoryDTO
 	 */
 	@GetMapping("/")
-	public List<InventoryDTO> getInventory(){
-		List<Inventory> inventories = inventoryService.getInventories();
-		return InventoryUtils.convertInventoryListToInventoryListDTOs(inventories);		
+	public ResponseEntity<?> getInventory(){
+		List<Inventory> inventoryList = inventoryService.getInventories();
+		if (inventoryList.isEmpty()) {
+			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
+		}
+		List<InventoryDTO> inventoryListDTO = InventoryUtils.convertInventoryListToInventoryListDTOs(inventoryList);	
+		return new ResponseEntity<>(inventoryListDTO, HttpStatus.OK);
 	}
 
 	/**
@@ -39,9 +47,13 @@ public class InventoryController {
 	 * @return list of InventoryDTO
 	 */
 	@GetMapping("/warehouse/{warehouseId}")
-	public List<InventoryDTO> getInventoryByWarehouseId(@PathVariable int warehouseId){
-		List<Inventory> inventories = inventoryService.getInventoryByWarehouseId(warehouseId);
-		return InventoryUtils.convertInventoryListToInventoryListDTOs(inventories);	
+	public ResponseEntity<?> getInventoryByWarehouseId(@PathVariable int warehouseId){
+		List<Inventory> inventoryList = inventoryService.getInventoryByWarehouseId(warehouseId);
+		if (inventoryList.isEmpty()) {
+			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
+		}
+		List<InventoryDTO> inventoryListDTO = InventoryUtils.convertInventoryListToInventoryListDTOs(inventoryList);
+		return new ResponseEntity<>(inventoryListDTO, HttpStatus.OK);
 	}
 
 	/**
@@ -51,9 +63,13 @@ public class InventoryController {
 	 * @return list of InventoryDTO
 	 */
 	@GetMapping("/product/{productId}")
-	public List<InventoryDTO> getInventoryByProductId(@PathVariable int productId){
-		List<Inventory> inventories = inventoryService.getInventoryByProductId(productId);
-		return InventoryUtils.convertInventoryListToInventoryListDTOs(inventories);	
+	public ResponseEntity<?> getInventoryByProductId(@PathVariable int productId){
+		List<Inventory> inventoryList = inventoryService.getInventoryByProductId(productId);
+		if (inventoryList.isEmpty()) {
+			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
+		}
+		List<InventoryDTO> inventoryListDTO = InventoryUtils.convertInventoryListToInventoryListDTOs(inventoryList);
+		return new ResponseEntity<>(inventoryListDTO, HttpStatus.OK);
 	}
 
 	/**
@@ -63,9 +79,13 @@ public class InventoryController {
 	 * @return list of InventoryDTO
 	 */
 	@GetMapping("/warehouse/{warehouseId}/product/{productId}")
-	public List<InventoryDTO> getInventoryByWarehouseIdAndProductId(@PathVariable int warehouseId , @PathVariable long productId){
-		List<Inventory> inventories = inventoryService.getInventoryByWarehouseIdAndProductId(warehouseId,productId);
-		return InventoryUtils.convertInventoryListToInventoryListDTOs(inventories);	
+	public ResponseEntity<?> getInventoryByWarehouseIdAndProductId(@PathVariable int warehouseId , @PathVariable long productId){
+		List<Inventory> inventoryList = inventoryService.getInventoryByWarehouseIdAndProductId(warehouseId,productId);
+		if (inventoryList.isEmpty()) {
+			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
+		}
+		List<InventoryDTO> inventoryListDTO = InventoryUtils.convertInventoryListToInventoryListDTOs(inventoryList);
+		return new ResponseEntity<>(inventoryListDTO, HttpStatus.OK);
 	}
 
 	/**
@@ -75,10 +95,15 @@ public class InventoryController {
 	 * @return the message
 	 */
 	@PostMapping("/product/{productAttributeId}/quantity/{quantity}")
-	public String addItemQuantityByProductAttributeId(@PathVariable int productAttributeId , @PathVariable int quantity){
-		return inventoryService.setItemQuantityByProductAttributeId(productAttributeId , quantity);
+	public ResponseEntity<CustomMessage> addItemQuantityByProductAttributeId(@PathVariable int productAttributeId , @PathVariable int quantity){
+		String status = inventoryService.setItemQuantityByProductAttributeId(productAttributeId , quantity);
+		if (status == null) {
+			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.OK);
 	}
 
+	
 	/**
 	 * This method is used to set the quantity of particular product having particular size present in particular warehouse.
 	 *  
@@ -86,8 +111,12 @@ public class InventoryController {
 	 * @return the message
 	 */
 	@PostMapping("/{warehouseId}/product/{productAttributeId}/quantity/{quantity}")
-	public String addItemQuantityByWarehouseIdAndProductAttributeId(@PathVariable int warehouseId, @PathVariable int productAttributeId , @PathVariable int quantity){
-		return inventoryService.setItemQuantityByWarehouseIdAndProductAttributeId(warehouseId, productAttributeId , quantity);
+	public ResponseEntity<CustomMessage> addItemQuantityByWarehouseIdAndProductAttributeId(@PathVariable int warehouseId, @PathVariable int productAttributeId , @PathVariable int quantity){
+		String status = inventoryService.setItemQuantityByWarehouseIdAndProductAttributeId(warehouseId, productAttributeId , quantity);
+		if (status == null) {
+			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.OK);
 	}
 
 	/**
@@ -97,8 +126,12 @@ public class InventoryController {
 	 * @return the message
 	 */
 	@PostMapping("/{warehouseId}/quantity/{quantity}")
-	public String addItemQuantityByWarehouseId(@PathVariable int warehouseId, @PathVariable int quantity){
-		return inventoryService.setItemQuantityByWarehouseId(warehouseId , quantity);
+	public ResponseEntity<CustomMessage> addItemQuantityByWarehouseId(@PathVariable int warehouseId, @PathVariable int quantity){
+		String status =  inventoryService.setItemQuantityByWarehouseId(warehouseId , quantity);
+		if (status == null) {
+			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.OK);
 	}
 
 	/**
@@ -108,7 +141,11 @@ public class InventoryController {
 	 * @return the message
 	 */
 	@PostMapping("/quantity/{quantity}")
-	public String addItemQuantityToAllProduct(@PathVariable int quantity){
-		return inventoryService.setItemQuantityToAllProducts(quantity);
+	public ResponseEntity<CustomMessage> addItemQuantityToAllProduct(@PathVariable int quantity){
+		String status = inventoryService.setItemQuantityToAllProducts(quantity);
+		if (status == null) {
+			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.OK);
 	}
 }

@@ -36,7 +36,7 @@ public class WarehouseServiceImpl implements WarehouseService {
 			warehouseRepository.save(warehouse);
 			return Constant.WAREHOUSE_UPDATED;
 		}
-		return Constant.NO_RECORD;
+		return null;
 	}
 
 	public String deleteWarehouse(int id) {
@@ -46,6 +46,6 @@ public class WarehouseServiceImpl implements WarehouseService {
 			warehouseRepository.save(warehouse);
 			return Constant.WAREHOUSE_DELETED;
 		}
-		return Constant.NO_RECORD;
+		return null;
 	}
 }

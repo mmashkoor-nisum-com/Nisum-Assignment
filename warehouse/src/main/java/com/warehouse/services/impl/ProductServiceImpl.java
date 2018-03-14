@@ -1,6 +1,7 @@
 package com.warehouse.services.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +50,7 @@ public class ProductServiceImpl implements ProductService{
 			productAttributesRepository.save(productAttribute);
 			return Constant.PRODUCT_UPDATED;
 		}
-		return Constant.NO_RECORD;
+		return null;
 	}
 
 	public String deleteProduct(long id) {
@@ -59,7 +60,7 @@ public class ProductServiceImpl implements ProductService{
 			productRepository.save(product);
 			return Constant.PRODUCT_DELETED;
 		}
-		return Constant.NO_RECORD;
+		return null;
 	}
 
 	public List<Product> getAllProductSizeByProductId(long id) {
