@@ -5,11 +5,10 @@ public class Constant {
 	public static final int IS_DELETE = 1;
 	
 	public static final String NO_RECORD = "No Record Found";
-	public static final String WAREHOUSE_UPDATED = "Warehouse Successfully Updated";
-	public static final String WAREHOUSE_ADDED = "Warehouse Successfully Added";
-	public static final String WAREHOUSE_DELETED = "Warehouse Successfully Deleted";
-	public static final String PRODUCT_DELETED = "Warehouse Successfully Deleted";
-	public static final String PRODUCT_ADDED = "New Product Successfully Added";
-	public static final String PRODUCT_UPDATED = "Product Successfully Updated";
-	public static final String ADD_ITEM_QUANTITY = "Item Quantity Successfully Added";
+	public static final String SAVE_SUCCESS_MESSAGE = "%s Saved Successfully";
+	public static final String UPDATE_SUCCESS_MESSAGE = "%s Updated Successfully";
+	public static final String CREATE_SUCCESS_MESSAGE = "%s Created Successfully";
+	public static final String DELETE_SUCCESS_MESSAGE = "%s Deleted Successfully";
+	public static final String ADDED_ITEM_SUCCESS_MESSAGE = "Item Quantity Successfully Added";
+
 }

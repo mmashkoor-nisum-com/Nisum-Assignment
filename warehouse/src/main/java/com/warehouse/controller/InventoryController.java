@@ -96,14 +96,14 @@ public class InventoryController {
 	 */
 	@PostMapping("/product/{productAttributeId}/quantity/{quantity}")
 	public ResponseEntity<CustomMessage> addItemQuantityByProductAttributeId(@PathVariable int productAttributeId , @PathVariable int quantity){
-		String status = inventoryService.setItemQuantityByProductAttributeId(productAttributeId , quantity);
-		if (status == null) {
+		List<Inventory> inventoryList = inventoryService.setItemQuantityByProductAttributeId(productAttributeId , quantity);
+		if (inventoryList.isEmpty()) {
 			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.OK);
+		return new ResponseEntity<>(new CustomMessage(Constant.ADDED_ITEM_SUCCESS_MESSAGE), HttpStatus.OK);
 	}
 
-	
+
 	/**
 	 * This method is used to set the quantity of particular product having particular size present in particular warehouse.
 	 *  
@@ -112,11 +112,11 @@ public class InventoryController {
 	 */
 	@PostMapping("/{warehouseId}/product/{productAttributeId}/quantity/{quantity}")
 	public ResponseEntity<CustomMessage> addItemQuantityByWarehouseIdAndProductAttributeId(@PathVariable int warehouseId, @PathVariable int productAttributeId , @PathVariable int quantity){
-		String status = inventoryService.setItemQuantityByWarehouseIdAndProductAttributeId(warehouseId, productAttributeId , quantity);
-		if (status == null) {
+		Inventory inventory = inventoryService.setItemQuantityByWarehouseIdAndProductAttributeId(warehouseId, productAttributeId , quantity);
+		if (inventory == null) {
 			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.OK);
+		return new ResponseEntity<>(new CustomMessage(Constant.ADDED_ITEM_SUCCESS_MESSAGE), HttpStatus.OK);
 	}
 
 	/**
@@ -127,11 +127,11 @@ public class InventoryController {
 	 */
 	@PostMapping("/{warehouseId}/quantity/{quantity}")
 	public ResponseEntity<CustomMessage> addItemQuantityByWarehouseId(@PathVariable int warehouseId, @PathVariable int quantity){
-		String status =  inventoryService.setItemQuantityByWarehouseId(warehouseId , quantity);
-		if (status == null) {
+		List<Inventory> inventoryList =  inventoryService.setItemQuantityByWarehouseId(warehouseId , quantity);
+		if (inventoryList.isEmpty()) {
 			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.OK);
+		return new ResponseEntity<>(new CustomMessage(Constant.ADDED_ITEM_SUCCESS_MESSAGE), HttpStatus.OK);
 	}
 
 	/**
@@ -142,10 +142,10 @@ public class InventoryController {
 	 */
 	@PostMapping("/quantity/{quantity}")
 	public ResponseEntity<CustomMessage> addItemQuantityToAllProduct(@PathVariable int quantity){
-		String status = inventoryService.setItemQuantityToAllProducts(quantity);
-		if (status == null) {
+		List<Inventory> inventoryList = inventoryService.setItemQuantityToAllProducts(quantity);
+		if (inventoryList.isEmpty()) {
 			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.OK);
+		return new ResponseEntity<>(new CustomMessage(Constant.ADDED_ITEM_SUCCESS_MESSAGE), HttpStatus.OK);
 	}
 }

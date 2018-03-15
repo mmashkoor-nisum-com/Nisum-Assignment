@@ -31,44 +31,40 @@ public class InventoryServiceImpl implements InventoryService{
 		return inventoryRepository.findByWarehouse_IdAndWarehouse_IsDeletedAndProductAttribute_Product_IdAndProductAttribute_Product_IsDeleted(warehouseId, Constant.IS_ACTIVE, productId, Constant.IS_ACTIVE);
 	}
 
-	public String setItemQuantityByProductAttributeId(int id , int quantity){
+	public List<Inventory> setItemQuantityByProductAttributeId(int id , int quantity){
 		List<Inventory> inventories = inventoryRepository.findByProductAttribute_IdAndProductAttribute_Product_IsDeleted(id,Constant.IS_ACTIVE);
 		if (!inventories.isEmpty()) {
 			inventories = InventoryUtils.setQuantityItem(inventories, quantity);
-			inventoryRepository.save(inventories);
-			return Constant.ADD_ITEM_QUANTITY;
+			return inventoryRepository.save(inventories);
 		}
-		return null;
+		return inventories;
 	}
 
-	public String setItemQuantityByWarehouseIdAndProductAttributeId(int id , int pid, int quantity){
+	public Inventory setItemQuantityByWarehouseIdAndProductAttributeId(int id , int pid, int quantity){
 		Inventory inventory = inventoryRepository.findByWarehouse_IdAndWarehouse_IsDeletedAndProductAttribute_IdAndProductAttribute_Product_IsDeleted(id,Constant.IS_ACTIVE,pid,Constant.IS_ACTIVE);
 		if (inventory != null) {
 			inventory = InventoryUtils.setQuantityItem(inventory, quantity);
-			inventoryRepository.save(inventory);
-			return Constant.ADD_ITEM_QUANTITY;
+			return inventoryRepository.save(inventory);
 		}
-		return null;
+		return inventory;
 	}
 
-	public String setItemQuantityByWarehouseId(int warehouseId, int quantity) {
+	public List<Inventory> setItemQuantityByWarehouseId(int warehouseId, int quantity) {
 		List<Inventory> inventories = inventoryRepository.findByWarehouse_IdAndWarehouse_IsDeleted(warehouseId , Constant.IS_ACTIVE);
 		if (!inventories.isEmpty()) {
 			inventories = InventoryUtils.setQuantityItem(inventories, quantity);
-			inventoryRepository.save(inventories);
-			return Constant.ADD_ITEM_QUANTITY;
+			return inventoryRepository.save(inventories);
 		}
-		return null;
+		return inventories;
 	}
 
-	public String setItemQuantityToAllProducts(int quantity) {
+	public List<Inventory> setItemQuantityToAllProducts(int quantity) {
 		List<Inventory> inventories = inventoryRepository.findByWarehouse_isDeletedAndProductAttribute_Product_isDeleted( Constant.IS_ACTIVE, Constant.IS_ACTIVE);
 		if (!inventories.isEmpty()) {
 			inventories = InventoryUtils.setQuantityItem(inventories, quantity);
-			inventoryRepository.save(inventories);
-			return Constant.ADD_ITEM_QUANTITY;
+			return inventoryRepository.save(inventories);
 		}
-		return null;
+		return inventories;
 	}
 
 }

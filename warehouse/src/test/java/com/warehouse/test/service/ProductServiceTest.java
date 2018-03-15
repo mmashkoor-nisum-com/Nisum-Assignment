@@ -68,8 +68,8 @@ public class ProductServiceTest {
 		
 		when(productRepository.save(mockProduct)).thenReturn(mockProduct);
 		when(productAttributeRepository.save(mockProductAttribute)).thenReturn(mockProductAttribute);
-		String result = productServiceImpl.addProduct(mockProduct);
-		assertEquals(Constant.PRODUCT_ADDED,result);
+		Product product = productServiceImpl.addProduct(mockProduct);
+		assertEquals(mockProduct,product);
 	}
 	
 	@Test
@@ -80,8 +80,8 @@ public class ProductServiceTest {
 		when(productRepository.findByIdAndIsDeleted(productId, Constant.IS_ACTIVE)).thenReturn(mockProduct);
 		when(productRepository.save(mockProduct)).thenReturn(mockProduct);
 		when(productAttributeRepository.save(mockProductAttribute)).thenReturn(mockProductAttribute);
-		String result = productServiceImpl.updateProduct(mockProduct, productId);
-		assertEquals(Constant.PRODUCT_UPDATED,result);
+		Product product = productServiceImpl.updateProduct(mockProduct, productId);
+		assertEquals(mockProduct,product);
 	}
 
 	@Test
@@ -90,8 +90,8 @@ public class ProductServiceTest {
 
 		when(productRepository.findByIdAndIsDeleted(productId, Constant.IS_ACTIVE)).thenReturn(mockProduct);
 		when(productRepository.save(mockProduct)).thenReturn(mockProduct);
-		String result = productServiceImpl.deleteProduct(productId);
-		assertEquals(Constant.PRODUCT_DELETED,result);
+		Product product = productServiceImpl.deleteProduct(productId);
+		assertEquals(mockProduct,product);
 	}
 	
 	@Test

@@ -29,38 +29,37 @@ public class ProductServiceImpl implements ProductService{
 		return productRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE);
 	}
 
-	public String addProduct(Product product) {
+	public Product addProduct(Product product) {
 		product = productRepository.save(product);
 		ProductAttribute productAttribute = new ProductAttribute();
 		productAttribute.setProduct(product);
 		productAttribute.setAttributesDetail(product.getProductAttributes().get(0).getAttributesDetail());
 		productAttributesRepository.save(productAttribute);
-		return Constant.PRODUCT_ADDED;
+		return product;
 	}
 
-	public String updateProduct(Product product, long id) {
+	public Product updateProduct(Product product, long id) {
 		Product productRecord = productRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE);
 		if (productRecord != null) {
 			product.setId(id);
-			productRepository.save(product);
 			ProductAttribute productAttribute = new ProductAttribute();
 			productAttribute.setId(productRecord.getProductAttributes().get(0).getId());
 			productAttribute.setProduct(product);
 			productAttribute.setAttributesDetail(product.getProductAttributes().get(0).getAttributesDetail());
+			productRepository.save(product);
 			productAttributesRepository.save(productAttribute);
-			return Constant.PRODUCT_UPDATED;
+			return product;
 		}
-		return null;
+		return productRecord;
 	}
 
-	public String deleteProduct(long id) {
+	public Product deleteProduct(long id) {
 		Product product = productRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE);
 		if(product != null) {
 			product.setIsDeleted(Constant.IS_DELETE);
-			productRepository.save(product);
-			return Constant.PRODUCT_DELETED;
+			return productRepository.save(product);
 		}
-		return null;
+		return product;
 	}
 
 	public List<Product> getAllProductSizeByProductId(long id) {

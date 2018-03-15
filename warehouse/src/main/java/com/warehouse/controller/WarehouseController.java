@@ -25,6 +25,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/warehouse")
 public class WarehouseController {
+	
+	private String entityName = "Warehouse";
 
 	@Autowired
 	private WarehouseService warehouseService;
@@ -67,8 +69,8 @@ public class WarehouseController {
 	 */
 	@PostMapping("/")
 	public ResponseEntity<CustomMessage> addWarehouse(@RequestBody Warehouse warehouse) {
-		String status = warehouseService.addWarehouse(warehouse);
-		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.CREATED);
+		warehouseService.addWarehouse(warehouse);
+		return new ResponseEntity<>(new CustomMessage(String.format(Constant.CREATE_SUCCESS_MESSAGE, entityName)), HttpStatus.CREATED);
 	}
 
 	/**
@@ -79,11 +81,11 @@ public class WarehouseController {
 	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<CustomMessage> updateWarehouse(@RequestBody Warehouse warehouse , @PathVariable int id) {
-		String status = warehouseService.updateWarehouse(warehouse , id);
-		if (status == null) {
+		Warehouse warehouseRecord = warehouseService.updateWarehouse(warehouse , id);
+		if (warehouseRecord == null) {
 			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.OK);
+		return new ResponseEntity<>(new CustomMessage(String.format(Constant.UPDATE_SUCCESS_MESSAGE, entityName)), HttpStatus.OK);
 	}
 
 	/**
@@ -94,10 +96,10 @@ public class WarehouseController {
 	 */
 	@DeleteMapping("/{warehouseId}")
 	public ResponseEntity<CustomMessage> deleteWarehouse(@PathVariable int warehouseId) {
-		String status = warehouseService.deleteWarehouse(warehouseId);
-		if (status == null) {
+		Warehouse warehouseRecord = warehouseService.deleteWarehouse(warehouseId);
+		if (warehouseRecord == null) {
 			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.OK);
+		return new ResponseEntity<>(new CustomMessage(String.format(Constant.DELETE_SUCCESS_MESSAGE, entityName)), HttpStatus.OK);
 	}
 }

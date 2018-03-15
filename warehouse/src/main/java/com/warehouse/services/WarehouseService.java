@@ -26,7 +26,7 @@ public interface WarehouseService {
 	 * @param warehouse
 	 * @return message
 	 */
-	public String addWarehouse(Warehouse warehouse);
+	public Warehouse addWarehouse(Warehouse warehouse);
 
 	/**
 	 * This method is used to update the warehouse.
@@ -34,7 +34,7 @@ public interface WarehouseService {
 	 * @param warehouse , warehouse id
 	 * @return message
 	 */
-	public String updateWarehouse(Warehouse warehouse , int id);
+	public Warehouse updateWarehouse(Warehouse warehouse , int id);
 	
 	/**
 	 * This method is used to delete the warehouse.
@@ -42,6 +42,6 @@ public interface WarehouseService {
 	 * @param warehouse , warehouse id
 	 * @return message
 	 */
-	public String deleteWarehouse(int id);
+	public Warehouse deleteWarehouse(int id);
 
 }

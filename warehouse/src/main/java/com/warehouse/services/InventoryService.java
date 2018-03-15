@@ -42,7 +42,7 @@ public interface InventoryService {
 	 * @param product attribute id ,quantity
 	 * @return message
 	 */	
-	public String setItemQuantityByProductAttributeId(int pId , int quanity);
+	public List<Inventory> setItemQuantityByProductAttributeId(int pId , int quanity);
 	
 	/**
 	 * The method set the quantity of particular product having particular size present in particular warehouse.
@@ -50,7 +50,7 @@ public interface InventoryService {
 	 * @param product attribute id, warehouse id, quantity
 	 * @return message
 	 */
-	public String setItemQuantityByWarehouseIdAndProductAttributeId(int id, int pId , int quanity);
+	public Inventory setItemQuantityByWarehouseIdAndProductAttributeId(int id, int pId , int quanity);
 	
 	/**
 	 * The method set the quantity of for all product present in given warehouse.
@@ -58,7 +58,7 @@ public interface InventoryService {
 	 * @param warehouse id, quantity
 	 * @return message
 	 */
-	public String setItemQuantityByWarehouseId(int warehouseId, int quantity);
+	public List<Inventory> setItemQuantityByWarehouseId(int warehouseId, int quantity);
 	
 
 	/**
@@ -67,5 +67,5 @@ public interface InventoryService {
 	 * @param warehouse id, quantity
 	 * @return message
 	 */
-	public String setItemQuantityToAllProducts(int quantity);
+	public List<Inventory> setItemQuantityToAllProducts(int quantity);
 }

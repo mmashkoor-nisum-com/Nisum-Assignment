@@ -73,8 +73,9 @@ public class InventoryServiceTest {
 		List<Inventory> mockInventoryList = MockFactory.getMockInventoryList();
 
 		when(inventoryRepository.findByProductAttribute_IdAndProductAttribute_Product_IsDeleted(productAttributeId,Constant.IS_ACTIVE)).thenReturn(mockInventoryList);
-		String result = inventoryServiceImpl.setItemQuantityByProductAttributeId(productAttributeId, quantity); 
-		assertEquals(Constant.ADD_ITEM_QUANTITY,result);
+		when(inventoryRepository.save(mockInventoryList)).thenReturn(mockInventoryList);
+		List<Inventory> result = inventoryServiceImpl.setItemQuantityByProductAttributeId(productAttributeId, quantity); 
+		assertEquals(mockInventoryList,result);
 	}
 
 	@Test
@@ -82,8 +83,9 @@ public class InventoryServiceTest {
 		Inventory mockInventory = MockFactory.getMockInventory(productId);
 
 		when(inventoryRepository.findByWarehouse_IdAndWarehouse_IsDeletedAndProductAttribute_IdAndProductAttribute_Product_IsDeleted(warehouseId,Constant.IS_ACTIVE,productAttributeId,Constant.IS_ACTIVE)).thenReturn(mockInventory);
-		String result = inventoryServiceImpl.setItemQuantityByWarehouseIdAndProductAttributeId(warehouseId , productAttributeId, quantity);
-		assertEquals(Constant.ADD_ITEM_QUANTITY,result);
+		when(inventoryRepository.save(mockInventory)).thenReturn(mockInventory);
+		Inventory result = inventoryServiceImpl.setItemQuantityByWarehouseIdAndProductAttributeId(warehouseId , productAttributeId, quantity);
+		assertEquals(mockInventory,result);
 	}
 
 	@Test
@@ -91,8 +93,9 @@ public class InventoryServiceTest {
 		List<Inventory> mockInventoryList = MockFactory.getMockInventoryList();
 
 		when(inventoryRepository.findByWarehouse_IdAndWarehouse_IsDeleted(warehouseId , Constant.IS_ACTIVE)).thenReturn(mockInventoryList);
-		String result = inventoryServiceImpl.setItemQuantityByWarehouseId(warehouseId, quantity); 
-		assertEquals(Constant.ADD_ITEM_QUANTITY,result);
+		when(inventoryRepository.save(mockInventoryList)).thenReturn(mockInventoryList);
+		List<Inventory> result = inventoryServiceImpl.setItemQuantityByWarehouseId(warehouseId, quantity); 
+		assertEquals(mockInventoryList,result);
 	}
 	
 	@Test
@@ -100,8 +103,9 @@ public class InventoryServiceTest {
 		List<Inventory> mockInventoryList = MockFactory.getMockInventoryList();
 
 		when(inventoryRepository.findByWarehouse_isDeletedAndProductAttribute_Product_isDeleted( Constant.IS_ACTIVE, Constant.IS_ACTIVE)).thenReturn(mockInventoryList);
-		String result = inventoryServiceImpl.setItemQuantityToAllProducts(quantity); 
-		assertEquals(Constant.ADD_ITEM_QUANTITY,result);
+		when(inventoryRepository.save(mockInventoryList)).thenReturn(mockInventoryList);
+		List<Inventory> result = inventoryServiceImpl.setItemQuantityToAllProducts(quantity); 
+		assertEquals(mockInventoryList,result);
 	}
 
 }

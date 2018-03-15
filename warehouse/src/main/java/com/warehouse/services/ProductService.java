@@ -26,7 +26,7 @@ public interface ProductService {
 	 * @param product
 	 * @return message
 	 */
-	public String addProduct(Product product);
+	public Product addProduct(Product product);
 
 	/**
 	 * This method is used to update the product.
@@ -34,7 +34,7 @@ public interface ProductService {
 	 * @param product , product id
 	 * @return message
 	 */
-	public String updateProduct(Product product , long id);
+	public Product updateProduct(Product product , long id);
 	
 	/**
 	 * This method is used to delete the product.
@@ -42,7 +42,7 @@ public interface ProductService {
 	 * @param product id
 	 * @return message
 	 */
-	public String deleteProduct(long id);
+	public Product deleteProduct(long id);
 	
 	/**
 	 * The method return the all the sizes of particular product present in any warehouse.

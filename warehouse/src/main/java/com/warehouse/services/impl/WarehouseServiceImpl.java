@@ -24,28 +24,25 @@ public class WarehouseServiceImpl implements WarehouseService {
 		return warehouseRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE);
 	}
 
-	public String addWarehouse(Warehouse warehouse) {
-		warehouseRepository.save(warehouse);
-		return Constant.WAREHOUSE_ADDED;
+	public Warehouse addWarehouse(Warehouse warehouse) {
+		return warehouseRepository.save(warehouse);
 	}
 
-	public String updateWarehouse(Warehouse warehouse, int id) {
+	public Warehouse updateWarehouse(Warehouse warehouse, int id) {
 		Warehouse warehouseRecord = warehouseRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE);
 		if(warehouseRecord != null) {
 			warehouse.setId(id);
-			warehouseRepository.save(warehouse);
-			return Constant.WAREHOUSE_UPDATED;
+			return warehouseRepository.save(warehouse);
 		}
-		return null;
+		return warehouseRecord;
 	}
 
-	public String deleteWarehouse(int id) {
+	public Warehouse deleteWarehouse(int id) {
 		Warehouse warehouse = warehouseRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE);
 		if(warehouse != null) {
 			warehouse.setIsDeleted(Constant.IS_DELETE);
-			warehouseRepository.save(warehouse);
-			return Constant.WAREHOUSE_DELETED;
+			return warehouseRepository.save(warehouse);
 		}
-		return null;
+		return warehouse;
 	}
 }

@@ -28,6 +28,8 @@ import com.warehouse.utils.ProductUtils;
 @RequestMapping("/product")
 public class ProductController {
 
+	private String entityName = "Product";
+	
 	@Autowired
 	private ProductService productService;
 
@@ -69,8 +71,8 @@ public class ProductController {
 	 */
 	@PostMapping("/")
 	public ResponseEntity<CustomMessage> addProduct(@RequestBody Product product) {
-		String status = productService.addProduct(product);
-		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.CREATED);
+		productService.addProduct(product);
+		return new ResponseEntity<>(new CustomMessage(String.format(Constant.CREATE_SUCCESS_MESSAGE, entityName)), HttpStatus.CREATED);
 	}
 
 	/**
@@ -81,11 +83,11 @@ public class ProductController {
 	 */
 	@PutMapping("/{productId}")
 	public ResponseEntity<CustomMessage> updateProduct(@RequestBody Product product , @PathVariable long productId) {
-		String status = productService.updateProduct(product, productId);
-		if (status == null) {
+		Product productRecord = productService.updateProduct(product, productId);
+		if (productRecord == null) {
 			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.OK);
+		return new ResponseEntity<>(new CustomMessage(String.format(Constant.UPDATE_SUCCESS_MESSAGE, entityName)), HttpStatus.OK);
 	}
 
 	/**
@@ -96,11 +98,11 @@ public class ProductController {
 	 */
 	@DeleteMapping("/{productId}")
 	public ResponseEntity<CustomMessage> deleteWarehouse(@PathVariable long productId) {
-		String status =  productService.deleteProduct(productId);
-		if (status == null) {
+		Product productRecord =  productService.deleteProduct(productId);
+		if (productRecord == null) {
 			return new ResponseEntity<>(new CustomMessage(Constant.NO_RECORD), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(new CustomMessage(status), HttpStatus.OK);
+		return new ResponseEntity<>(new CustomMessage(String.format(Constant.DELETE_SUCCESS_MESSAGE, entityName)), HttpStatus.OK);
 	}
 
 	/**

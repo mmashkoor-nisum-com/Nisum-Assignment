@@ -60,8 +60,8 @@ public class WarehouseServiceTest {
 		Warehouse mockWarehouse = MockFactory.getMockWarehouse(id);
 		
 		when(warehouseRepository.save(mockWarehouse)).thenReturn(mockWarehouse);
-		String result = warehouseServiceImpl.addWarehouse(mockWarehouse);
-		assertEquals(Constant.WAREHOUSE_ADDED,result);
+		Warehouse warehouse = warehouseServiceImpl.addWarehouse(mockWarehouse);
+		assertEquals(mockWarehouse,warehouse);
 	}
 	
 	@Test
@@ -70,8 +70,8 @@ public class WarehouseServiceTest {
 		
 		when(warehouseRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE)).thenReturn(mockWarehouse);
 		when(warehouseRepository.save(mockWarehouse)).thenReturn(mockWarehouse);
-		String result = warehouseServiceImpl.updateWarehouse(mockWarehouse,id);
-		assertEquals(Constant.WAREHOUSE_UPDATED,result);
+		Warehouse warehouse = warehouseServiceImpl.updateWarehouse(mockWarehouse,id);
+		assertEquals(mockWarehouse,warehouse);
 	}
 	
 	@Test
@@ -80,8 +80,8 @@ public class WarehouseServiceTest {
 		
 		when(warehouseRepository.findByIdAndIsDeleted(id, Constant.IS_ACTIVE)).thenReturn(mockWarehouse);
 		when(warehouseRepository.save(mockWarehouse)).thenReturn(mockWarehouse);
-		String result = warehouseServiceImpl.deleteWarehouse(id);
-		assertEquals(Constant.WAREHOUSE_DELETED,result);
+		Warehouse warehouse =  warehouseServiceImpl.deleteWarehouse(id);
+		assertEquals(mockWarehouse,warehouse);
 	}
 	
 }
