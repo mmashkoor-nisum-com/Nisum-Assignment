@@ -53,6 +53,11 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 			<!--converting Java 8 date and time classes to JSON format representation -->
 		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>0.7.5</version>
+		</dependency>
 	</dependencies>
 
 	<build>

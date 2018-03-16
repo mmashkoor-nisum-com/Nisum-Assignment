@@ -2,7 +2,6 @@ package com.warehouse.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.warehouse.dto.ProductSizeDTO;
 import com.warehouse.models.Product;
 
